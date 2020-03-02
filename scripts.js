@@ -3,7 +3,7 @@ class Student {
         this.university = university;
         this.course = course;
         this.fullName = fullName;
-        this.marks = [5, 4, 4, 5];
+        this.marksArray = [5, 4, 4, 5];
         this.dismiss = false;
     }
 
@@ -11,22 +11,22 @@ class Student {
         return this.university + " " + this.course + " " + this.fullName;
     }
 
-    get marksStudent() {
+    get marks() {
         if (this.dismiss) {
             return null;
         } else {
-            return this.marks;
+            return this.marksArray;
         }
     }
-    set marksStudent(value) {
-        this.marks.push(value);
+    set marks(value) {
+        this.marksArray.push(value);
     }
 
     getAverageMark() {
-        const average = this.marks.reduce((sum, element) => {
+        const average = this.marksArray.reduce((sum, element) => {
             return (sum += element);
         }, 0);
-        return (average / this.marks.length).toFixed(1);
+        return (average / this.marksArray.length).toFixed(1);
     }
     dismissStudent() {
         this.dismiss = true;
@@ -39,15 +39,13 @@ let object = new Student("KHU Distance Learning", 4, "Diana Varvadiuk");
 document.writeln(
     `<p>Information about the course, school and student's name :  ${object.getInfo()}</p>`
 );
-document.writeln(`<p>All array :  ${object.marksStudent}</p>`);
-object.marksStudent = 5;
-document.writeln(`<p>Array after add mark:  ${object.marksStudent}</p>`);
+document.writeln(`<p>All array :  ${object.marks}</p>`);
+object.marks = 5;
+document.writeln(`<p>Array after add mark:  ${object.marks}</p>`);
 document.writeln(`<p>Average student score:  ${object.getAverageMark()}</p>`);
-object.dismissStudent();
-document.writeln(`<p>Exclude the students:  ${object.marksStudent}</p>`);
 object.recoverStudent();
 document.writeln(
-    `<p> Allow to restore the student:  ${object.marksStudent}</p>`
+    `<p> Allow to restore the student:  ${object.marks}</p>`
 );
 
 class BudgetStudent extends Student {
@@ -55,9 +53,11 @@ class BudgetStudent extends Student {
         super();
         info = this.getScholarship();
         this.interval;
+
     }
     getScholarship() {
-        if (this.getAverageMark() >= 4.0 && this.dismiss == false) {
+        const averageMark = 4.0;
+        if (this.getAverageMark() >= averageMark && this.dismiss == false) {
             console.log("You received 1400 UAH. scholarships ");
         } else {
             console.log("Sorry,you don't have scholarships ");
