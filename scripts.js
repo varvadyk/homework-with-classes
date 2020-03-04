@@ -24,12 +24,17 @@ class Student {
         } else {
         this.marksArray.push(value);
     }
+    }
 
     getAverageMark() {
+        if (this.dismiss) {
+            return null;
+        } else {
         const average = this.marksArray.reduce((sum, element) => {
             return (sum += element);
         }, 0);
         return (average / this.marksArray.length).toFixed(1);
+    }
     }
     dismissStudent() {
         this.dismiss = true;
