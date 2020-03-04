@@ -19,6 +19,9 @@ class Student {
         }
     }
     set marks(value) {
+          if (this.dismiss) {
+            return null;
+        } else {
         this.marksArray.push(value);
     }
 
